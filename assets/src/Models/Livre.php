@@ -29,7 +29,23 @@ class Livre extends Document implements EmpruntableInterface {
     //Method imposé par l'interface
     public function emprunter(): bool
     {
-        
+    //Vérification si le livre est toujours disponible    
+    if (!$this->disponible)
+            {
+                return false;
+            }
+            $this->disponible = false;
+            return true;
+    }
+
+    public function retourner(): void
+    {
+        $this->disponible = true;
+    }
+
+    public function estDisponible(): bool
+    {
+        return $this->disponible;
     }
 
 }
