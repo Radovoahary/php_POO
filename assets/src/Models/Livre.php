@@ -12,7 +12,24 @@ class Livre extends Document implements EmpruntableInterface {
 
     public function _construct(string $titre, string $auteur, int $anneePublication, string $isbn)
     {
-        parent::_construct($titre, $auteur, $anneePublication);
+    //Appel du constructeur parent    
+    parent::_construct($titre, $auteur, $anneePublication);
+    if (trim($isbn) === '')
+        {
+            throw new \InvalidArgumentException("ISBN invalide");
+        }
+        $this->isbn = $isbn;
+    }
+
+    public function getIsbn(): string
+    {
+        return $this->isbn;
+    }
+
+    //Method imposé par l'interface
+    public function emprunter(): bool
+    {
+        
     }
 
 }
