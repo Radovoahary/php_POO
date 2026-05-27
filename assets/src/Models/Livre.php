@@ -48,6 +48,26 @@ class Livre extends Document implements EmpruntableInterface {
         return $this->disponible;
     }
 
+    public function getTypeDocument()
+    {
+        return "Livre";
+    }
+
+    public function afficherStatut(): string
+    {
+        if ($this->disponible)
+            {
+                return "Disponible";
+            }
+
+            return "Emprunté";
+    }
+
+    public function _to_String(): string
+    {
+        return parent::_to_String() . " | ISBN : {$this->isbn}" . " | Statut : {$this->afficherStatut()}";
+    }
+
 }
 
 ?>
