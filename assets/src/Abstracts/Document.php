@@ -69,7 +69,7 @@ abstract class Document
 
     public function _toString(): string 
     {
-        return "Titre : ";
+        return "Titre : {$this->titre} | " . "Auteur : {$this->auteur} | " . "Année : {$this->anneePublication}";
     }
 }
 ?>
