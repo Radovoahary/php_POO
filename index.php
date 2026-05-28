@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-
 require_once 'autoload.php';
 //Importation des classes
-use Biblio\Models\Livre;
-use Biblio\Models\Magazine;
-use Biblio\Models\Utilisateur;
-use Biblio\Services\BibliothequeManager;
+use BIBLIO_POO\Models\Livre;
+use BIBLIO_POO\Models\Magazine;
+use BIBLIO_POO\Models\Utilisateur;
+use BIBLIO_POO\Services\BibliothequeManager;
 //Initialisation du manager
 $manager = new BibliothequeManager();
-
 //Donnée d'illustration
 $livre1 = new Livre(
     "Clean Code",
