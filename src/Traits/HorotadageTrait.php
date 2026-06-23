@@ -1,8 +1,8 @@
 <?php
-declare(strict_type=1);
+declare(strict_types=1);
 namespace BIBLIO_POO\Traits;
 
-trait HorotadatageTrait
+trait HorotadageTrait
 {
     protected string $dateCreation;
     protected ?string $dateModification = null;

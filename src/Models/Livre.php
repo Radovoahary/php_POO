@@ -1,5 +1,5 @@
 <?php
-declare(strict_type=1);
+declare(strict_types=1);
 
 namespace BIBLIO_POO\Models;
 use BIBLIO_POO\Abstracts\Document;
@@ -48,7 +48,7 @@ class Livre extends Document implements EmpruntableInterface {
         return $this->disponible;
     }
 
-    public function getTypeDocument()
+    public function getTypeDocument(): string
     {
         return "Livre";
     }

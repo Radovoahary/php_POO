@@ -1,5 +1,5 @@
 <?php
-declare(strict_type=1);
+declare(strict_types=1);
 
 namespace BIBLIO_POO\Models;
 use BIBLIO_POO\Abstracts\Document;
@@ -9,14 +9,14 @@ class Magazine extends Document implements EmpruntableInterface {
     private int $numeroEdition;
     private bool $disponible = true;
 
-    public function _construct(
+    public function __construct(
         string $titre,
         string $auteur,
         int $anneePublication,
         int $numeroEdition
     )
     {
-        parent::_construct(
+        parent::__construct(
             $titre,
             $auteur,
             $anneePublication
@@ -56,7 +56,7 @@ class Magazine extends Document implements EmpruntableInterface {
         return $this->disponible;
     }
 
-    public function getTypeDocument()
+    public function getTypeDocument(): string
     {
         return "Magazine";
     }
@@ -70,7 +70,7 @@ class Magazine extends Document implements EmpruntableInterface {
             return "Emprunté";
     }
 
-    public function _toString(): string 
+    public function __toString(): string 
     {
         return parent::_toString() . "Edition n° {$this->numeroEdition}" . " | Statut : {$this->afficherStatut()}";
     }
