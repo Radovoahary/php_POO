@@ -2,20 +2,22 @@
 declare(strict_types=1);
 
 namespace BIBLIO_POO\Models;
+
 use BIBLIO_POO\Abstracts\Document;
 use BIBLIO_POO\Interfaces\EmpruntableInterface;
 
 class Livre extends Document implements EmpruntableInterface {
-    //Propriété spécifique du livre    
+    // Propriété spécifique du livre    
     private string $isbn;
     private bool $disponible = true;
 
-    public function _construct(string $titre, string $auteur, int $anneePublication, string $isbn)
+    // CORRIGÉ : __construct avec deux underscores
+    public function __construct(string $titre, string $auteur, int $anneePublication, string $isbn)
     {
-    //Appel du constructeur parent    
-    parent::_construct($titre, $auteur, $anneePublication);
-    if (trim($isbn) === '')
-        {
+        // CORRIGÉ : parent::__construct avec deux underscores
+        parent::__construct($titre, $auteur, $anneePublication);
+        
+        if (trim($isbn) === '') {
             throw new \InvalidArgumentException("ISBN invalide");
         }
         $this->isbn = $isbn;
@@ -26,16 +28,15 @@ class Livre extends Document implements EmpruntableInterface {
         return $this->isbn;
     }
 
-    //Method imposé par l'interface
+    // Méthode imposée par l'interface
     public function emprunter(): bool
     {
-    //Vérification si le livre est toujours disponible    
-    if (!$this->disponible)
-            {
-                return false;
-            }
-            $this->disponible = false;
-            return true;
+        // Vérification si le livre est toujours disponible    
+        if (!$this->disponible) {
+            return false;
+        }
+        $this->disponible = false;
+        return true;
     }
 
     public function retourner(): void
@@ -55,19 +56,16 @@ class Livre extends Document implements EmpruntableInterface {
 
     public function afficherStatut(): string
     {
-        if ($this->disponible)
-            {
-                return "Disponible";
-            }
+        if ($this->disponible) {
+            return "Disponible";
+        }
 
-            return "Emprunté";
+        return "Emprunté";
     }
 
-    public function _to_String(): string
+    // CORRIGÉ : Nom de méthode magique __toString standardisé
+    public function __toString(): string
     {
-        return parent::_to_String() . " | ISBN : {$this->isbn}" . " | Statut : {$this->afficherStatut()}";
+        return parent::__toString() . " | ISBN : {$this->isbn} | Statut : {$this->afficherStatut()}";
     }
-
 }
-
-?>
