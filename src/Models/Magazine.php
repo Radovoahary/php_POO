@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace BIBLIO_POO\Models;
+
 use BIBLIO_POO\Abstracts\Document;
 use BIBLIO_POO\Interfaces\EmpruntableInterface;
 
@@ -14,20 +15,24 @@ class Magazine extends Document implements EmpruntableInterface {
         string $auteur,
         int $anneePublication,
         int $numeroEdition
-    )
-    {
+    ) {
         parent::__construct(
             $titre,
             $auteur,
             $anneePublication
         );
 
-        if ($numeroEdition <= 0)
-            {
-                throw new \InvalidArgumentException("Numéro d'édition invalide.");
-            }
+        if ($numeroEdition <= 0) {
+            throw new \InvalidArgumentException("Numéro d'édition invalide.");
+        }
 
-            $this->numeroEdition = $numeroEdition;
+        $this->numeroEdition = $numeroEdition;
+    }
+
+    // AJOUTÉ : Requis par BibliothequeManager pour l'insertion SQL générique
+    public function getNumero(): int
+    {
+        return $this->numeroEdition;
     }
 
     public function getNumeroEdition(): int
@@ -37,13 +42,12 @@ class Magazine extends Document implements EmpruntableInterface {
 
     public function emprunter(): bool
     {
-        if (!$this->disponible)
-            {
-                return false;
-            }
+        if (!$this->disponible) {
+            return false;
+        }
 
-            $this->disponible = false;
-            return true;
+        $this->disponible = false;
+        return true;
     }
 
     public function retourner(): void
@@ -63,17 +67,15 @@ class Magazine extends Document implements EmpruntableInterface {
 
     public function afficherStatut(): string 
     {
-        if ($this->disponible)
-            {
-                return "Disponible";
-            }
-            return "Emprunté";
+        if ($this->disponible) {
+            return "Disponible";
+        }
+        return "Emprunté";
     }
 
+    // CORRIGÉ : parent::__toString() avec deux underscores
     public function __toString(): string 
     {
-        return parent::_toString() . "Edition n° {$this->numeroEdition}" . " | Statut : {$this->afficherStatut()}";
+        return parent::__toString() . " | Edition n° {$this->numeroEdition} | Statut : {$this->afficherStatut()}";
     }
 }
-
-?>
